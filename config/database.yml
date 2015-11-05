@@ -1,5 +1,10 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: blabber_development
+  database: health_tracker_react_development
+  pool: 5
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: health_tracker_react_test
   pool: 5
