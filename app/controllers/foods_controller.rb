@@ -1,6 +1,6 @@
 class FoodsController < ApplicationController
   def index
     @foods = Food.all
-    render json: @foods, only: [:name, :calories]
+    render json: @foods, only: [:name, :calories, :id]
   end
 end
