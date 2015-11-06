@@ -10,9 +10,14 @@ class MealsController < ApplicationController
     render json: @meal, include: {food: {only: [:name, :calories] } }, only: [:user_id, :food_id, :day_id, :id]
   end
 
+  def destroy
+    binding.pry
+    @meal = Meal.find(meal_params.id)
+  end
+
   private
   def meal_params
-    params.require(:meal).permit(:food_id, :user_id, :day_id)
+    params.require(:meal).permit(:food_id, :user_id, :day_id, :id)
 
   end
 end

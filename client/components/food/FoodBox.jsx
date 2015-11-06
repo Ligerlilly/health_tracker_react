@@ -38,13 +38,20 @@ export default React.createClass({
       this.setState({foods: []})
     }.bind(this));
   },
+  deleteMeal(data) {
+    debugger;
+    this.props.writeToAPI('delete', this.props.origin + "/meal/" + `${data.meal.id}`, data, (meals) => {
+      debugger;
+      this.setState({meals: meals});
+    })
+  },
   render() {
     return (
       <div>
         <h3>foods</h3>
         <input type='text' placeholder='Search for a food:' className='form-control' onKeyUp={this.onKeyUp} ref='foodSearch' id='foodSearch'/>
         <FoodList data={this.state.foods} writeToAPI={this.props.writeToAPI} origin={this.props.origin} input={this.refs.foodSearch} createMeal={this.createMeal} />
-        <MealList data={this.state.meals} />
+        <MealList data={this.state.meals} deleteMeal={this.deleteMeal} />
       </div>
     );
   }
