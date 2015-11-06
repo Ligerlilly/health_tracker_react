@@ -30,8 +30,8 @@ export default React.createClass({
   render() {
     return <div>
       <h3>foods</h3>
-      <input type='text' placeholder='Search for a food:' className='form-control' onKeyUp={this.onKeyUp} ref='foodSearch'/>
-      <FoodList data={this.state.food} />
+      <input type='text' placeholder='Search for a food:' className='form-control' onKeyUp={this.onKeyUp} ref='foodSearch' id='foodSearch'/>
+      <FoodList data={this.state.food} writeToAPI={this.props.writeToAPI} origin={this.props.origin} />
     </div>;
   }
 });

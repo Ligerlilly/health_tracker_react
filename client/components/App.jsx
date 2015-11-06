@@ -21,8 +21,22 @@ export default React.createClass({
       }
     });
   },
+  writeToAPI(method, url, data, successFunction) {
+    Reqwest({
+      url: url,
+      data: data,
+      type: 'json',
+      method: method,
+      contentType: 'application/json',
+      success: successFunction,
+      error(error) {
+        console.log(url, error['reponse']);
+        location = '/';
+      }
+    });
+  },
   render() {
-    var childrenWithProps = React.cloneElement(this.props.children, {readFromAPI: this.readFromAPI, origin: this.props.origin})
+    var childrenWithProps = React.cloneElement(this.props.children, {readFromAPI: this.readFromAPI, origin: this.props.origin, writeToAPI: this.writeToAPI})
     return <div>
       <Navbar>
         <NavBrand><Link to='/'>Health Tracker React</Link></NavBrand>
