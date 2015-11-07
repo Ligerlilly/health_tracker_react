@@ -17,6 +17,11 @@ export default React.createClass({
   },
   readMealsFromAPI() {
     this.props.readFromAPI(this.props.origin + '/meals', (meals) => {
+      let totalCals = 0;
+      meals.forEach(meal => {
+        totalCals += meal.food.calories;
+      });
+      this.setState({tCals: totalCals});
       this.setState({meals: meals})
     }.bind(this));
   },

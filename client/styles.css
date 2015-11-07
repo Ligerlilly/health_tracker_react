@@ -6,7 +6,12 @@
 #foodSearch {
   margin-bottom: 1em;
 }
-
+#exerciseSearch {
+  margin-bottom: 1em;
+}
+#duration {
+  margin-bottom: .5em;
+}
 .nav-link {
   font-size: 1em;
 }

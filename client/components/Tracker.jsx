@@ -7,7 +7,7 @@ export default React.createClass({
     return <div className='row'>
       <h1 className='text-center'>Total daily calories</h1>
       <div className='col-md-6'><FoodBox readFromAPI={this.props.readFromAPI} origin={this.props.origin} writeToAPI={this.props.writeToAPI} /></div>
-      <div className='col-md-6'><ExerciseBox /></div>
+      <div className='col-md-6'><ExerciseBox readFromAPI={this.props.readFromAPI} origin={this.props.origin} writeToAPI={this.props.writeToAPI} /></div>
     </div>;
   }
 });
