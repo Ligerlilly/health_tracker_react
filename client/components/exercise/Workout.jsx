@@ -1,7 +1,8 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
 export default React.createClass({
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     let data = {workout: {id: this.props.id}};
     this.props.deleteWorkout(JSON.stringify(data), this.props.id);
   },
@@ -12,7 +13,7 @@ export default React.createClass({
           <span>
             <h4 className='inline' ref='name'>{this.props.name} </h4>
           </span>
-          <span>calories:
+          <span>calories burned:
             <h4 className='inline' ref='calories'>{this.props.cals_per_hour} </h4>
           </span>
           <Button bsStyle='danger' bsSize='xs' type='submit'>

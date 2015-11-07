@@ -3,7 +3,8 @@ import {Button} from 'react-bootstrap';
 
 
 export default React.createClass({
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     let data = {meal: {id: this.props.id}};
     this.props.deleteMeal(JSON.stringify(data), this.props.id);
   },

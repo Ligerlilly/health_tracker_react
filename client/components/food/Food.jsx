@@ -2,7 +2,7 @@ import React from 'react';
 import {Button} from 'react-bootstrap';
 export default React.createClass({
   handleSubmit(e) {
-    e.preventDefault;
+    e.preventDefault();
     let meal = {meal: {day_id: this.refs.day_id.value, user_id: this.refs.user_id.value, food_id: this.refs.id.value}};
     this.props.createMeal(JSON.stringify(meal));
     this.props.input.value = '';

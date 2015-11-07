@@ -2,7 +2,7 @@ import React from 'react';
 import {Button} from 'react-bootstrap';
 export default React.createClass({
   handleSubmit(e) {
-    e.preventDefault;
+    e.preventDefault();
     let workout = {workout: {day_id: this.refs.day_id.value, user_id: this.refs.user_id.value, exercise_id: this.props.id, duration: this.refs.duration.value}};
     this.props.createWorkout(JSON.stringify(workout));
     this.props.input.value = '';
