@@ -27,3 +27,4 @@
 
 # Ignore environment files
 /config/environments/development.rb
+/config/secrets.rb

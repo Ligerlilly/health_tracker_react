@@ -22,7 +22,6 @@ export default React.createClass({
     });
   },
   writeToAPI(method, url, data, successFunction) {
-    debugger;
     Reqwest({
       url: url,
       data: data,
@@ -31,7 +30,6 @@ export default React.createClass({
       contentType: 'application/json',
       success: successFunction,
       error(error) {
-        debugger;
         console.log(url, error['reponse']);
         location = '/';
       }

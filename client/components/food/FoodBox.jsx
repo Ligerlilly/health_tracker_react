@@ -38,10 +38,8 @@ export default React.createClass({
       this.setState({foods: []})
     }.bind(this));
   },
-  deleteMeal(data) {
-    debugger;
-    this.props.writeToAPI('delete', this.props.origin + "/meal/" + `${data.meal.id}`, data, (meals) => {
-      debugger;
+  deleteMeal(data, id) {
+    this.props.writeToAPI('delete', this.props.origin + "/meals/" + id, data, (meals) => {
       this.setState({meals: meals});
     })
   },

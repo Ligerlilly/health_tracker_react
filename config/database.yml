@@ -2,9 +2,13 @@ development:
   adapter: postgresql
   encoding: unicode
   database: health_tracker_react_development
+  username: <%= ENV['username'] %>
+  password: <%= ENV['password'] %>
   pool: 5
 test:
   adapter: postgresql
   encoding: unicode
   database: health_tracker_react_test
+  username: <%= ENV['username'] %>
+  password: <%= ENV['password'] %>
   pool: 5

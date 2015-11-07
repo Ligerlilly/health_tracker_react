@@ -4,9 +4,8 @@ import {Button} from 'react-bootstrap';
 
 export default React.createClass({
   handleSubmit() {
-
     let data = {meal: {id: this.props.id}};
-    this.props.deleteMeal(JSON.stringify(data));
+    this.props.deleteMeal(JSON.stringify(data), this.props.id);
   },
   render() {
     return (
