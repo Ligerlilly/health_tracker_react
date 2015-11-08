@@ -15,7 +15,7 @@ class WorkoutsController < ApplicationController
     @workout = Workout.find(workout_params[:id])
     @workout.destroy
     @workouts = Workout.all.order(created_at: :desc)
-    render json: @workouts, include: { exercise: {only:[:name, :cals_per_hour, :id] } }, only: [:user_id, :duration, :day_id]
+    render json: @workouts, include: { exercise: {only:[:name, :cals_per_hour, :id] } }, only: [:user_id, :duration, :day_id, :id]
 
   end
 

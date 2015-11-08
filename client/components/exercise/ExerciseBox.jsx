@@ -44,12 +44,17 @@ export default React.createClass({
   },
   deleteWorkout(data, id) {
     this.props.writeToAPI('delete', this.props.origin + "/workouts/" + id, data, (workouts) => {
-      let totalCals = 0;
+      //let totalCals = 0;
       // workouts.forEach(workout => {
       //   totalCals += workout.exercise.calories;
       // });
       // this.setState({tCals: totalCals});
-      this.setState({workouts: workouts});
+      if (workouts !== null) {
+        this.setState({workouts: workouts});
+      }
+      else {
+        this.setSate({workouts: []});
+      }
     })
   },
   render() {
