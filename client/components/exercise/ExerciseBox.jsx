@@ -4,7 +4,7 @@ import WorkoutList from './WorkoutList';
 
 export default React.createClass({
   getInitialState() {
-    return {data: [], exercises: [], workouts: []};
+    return {data: [], exercises: [], workouts: [], bCals: 0};
   },
   componentDidMount() {
     this.readExercisesFromAPI();
@@ -37,30 +37,33 @@ export default React.createClass({
       workouts.unshift(workout);
       this.setState({workouts: workouts});
       this.setState({exercises: []})
-      // let totalCals = this.state.tCals;
-      // totalCals += workout.exercise.calories;
-      // this.setState({tCals: totalCals});
+      let totalBCals = this.state.bCals;
+      totalBCals += (workout.exercise.cals_per_hour / 60) * workout.duration;
+      this.setState({bCals: totalBCals});
+
     }.bind(this));
   },
   deleteWorkout(data, id) {
     this.props.writeToAPI('delete', this.props.origin + "/workouts/" + id, data, (workouts) => {
-      //let totalCals = 0;
-      // workouts.forEach(workout => {
-      //   totalCals += workout.exercise.calories;
-      // });
-      // this.setState({tCals: totalCals});
+      let totalBCals = 0;
+      workouts.forEach(workout => {
+        totalBCals += (workout.exercise.cals_per_hour / 60) * workout.duration;
+      });
+
       if (workouts !== null) {
         this.setState({workouts: workouts});
+        this.setState({bCals: totalBCals});
       }
       else {
         this.setSate({workouts: []});
+        this.setState({bCals: 0});
       }
     })
   },
   render() {
     return <div>
       <h2>Exercises</h2>
-      <h3>Calories burned today: </h3>
+      <h3>Calories burned today: {this.state.bCals}</h3>
       <input type='text' placeholder='Search for an exercise:' className='form-control' onKeyUp={this.onKeyUp} ref='exerciseSearch' id='exerciseSearch'/>
       <ExerciseList data={this.state.exercises} writeToAPI={this.props.writeToAPI} origin={this.props.origin} input={this.refs.exerciseSearch} createWorkout={this.createWorkout} />
       <WorkoutList data={this.state.workouts} deleteWorkout={this.deleteWorkout} />

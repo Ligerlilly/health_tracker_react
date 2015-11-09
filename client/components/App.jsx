@@ -38,7 +38,7 @@ export default React.createClass({
   render() {
     var childrenWithProps = React.cloneElement(this.props.children, {readFromAPI: this.readFromAPI, origin: this.props.origin, writeToAPI: this.writeToAPI})
     return <div>
-      <Navbar>
+      <Navbar inverse>
         <NavBrand><Link to='/'>Health Tracker React</Link></NavBrand>
         <Nav>
           <Link className='navbar-brand nav-link' to='/about'>About</Link>
