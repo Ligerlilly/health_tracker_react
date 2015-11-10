@@ -17,7 +17,13 @@ export default React.createClass({
   },
   readWorkoutsFromAPI() {
     this.props.readFromAPI(this.props.origin + '/workouts', (workouts) => {
-      this.setState({workouts: workouts})
+      let totalCals = 0;
+      workouts.forEach(workout => {
+        totalCals += workout.exercise.cals_per_hour / 60 * workout.duration;
+      });
+      this.setState({bCals: totalCals});
+      this.props.burnedCals(totalCals);
+      this.setState({workouts: workouts});
     }.bind(this));
   },
   onKeyUp(e) {
@@ -40,6 +46,7 @@ export default React.createClass({
       let totalBCals = this.state.bCals;
       totalBCals += (workout.exercise.cals_per_hour / 60) * workout.duration;
       this.setState({bCals: totalBCals});
+      this.props.burnedCals(totalBCals);
 
     }.bind(this));
   },
@@ -58,7 +65,9 @@ export default React.createClass({
         this.setSate({workouts: []});
         this.setState({bCals: 0});
       }
-    })
+    });
+    let parsedData = JSON.parse(data);
+    this.props.eatenCals(parsedData.workout.bCals);
   },
   render() {
     return <div>

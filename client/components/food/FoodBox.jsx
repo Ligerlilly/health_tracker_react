@@ -22,7 +22,8 @@ export default React.createClass({
         totalCals += meal.food.calories;
       });
       this.setState({tCals: totalCals});
-      this.setState({meals: meals})
+      this.setState({meals: meals});
+      this.props.eatenCals(totalCals);
     }.bind(this));
   },
   onKeyUp(e) {
@@ -44,6 +45,7 @@ export default React.createClass({
       let totalCals = this.state.tCals;
       totalCals += meal.food.calories;
       this.setState({tCals: totalCals});
+      this.props.eatenCals(totalCals);
     }.bind(this));
   },
   deleteMeal(data, id) {
@@ -54,7 +56,9 @@ export default React.createClass({
       });
       this.setState({tCals: totalCals});
       this.setState({meals: meals});
-    })
+    });
+    let parsedData = JSON.parse(data);
+    this.props.burnedCals(parsedData.meal.calories);
   },
   render() {
     return (

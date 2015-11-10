@@ -5,7 +5,7 @@ import {Button} from 'react-bootstrap';
 export default React.createClass({
   handleSubmit(e) {
     e.preventDefault();
-    let data = {meal: {id: this.props.id}};
+    let data = {meal: {id: this.props.id, calories: this.props.calories}};
     this.props.deleteMeal(JSON.stringify(data), this.props.id);
   },
   render() {

@@ -3,7 +3,7 @@ import {Button} from 'react-bootstrap';
 export default React.createClass({
   handleSubmit(e) {
     e.preventDefault();
-    let data = {workout: {id: this.props.id}};
+    let data = {workout: {id: this.props.id, bCals: this.props.cals_per_hour / 60 * this.props.duration}};
     this.props.deleteWorkout(JSON.stringify(data), this.props.id);
   },
   render() {

@@ -21,7 +21,7 @@ export default React.createClass({
           <span>calories burned per hour:
             <h4 className='inline' ref='calories'>{this.props.calsPerHour} </h4>
           </span>
-          <input type='text' id='duration' className='form-control' placeholder='Enter duration in mins' ref='duration' />
+          <input type='text' id='duration' className='form-control' placeholder='Enter duration in mins' ref='duration' required='required' type="number" min='1' max='480' />
           <Button bsStyle="success" bsSize="xs" type='submit' >
              Workout
           </Button>
