@@ -20,7 +20,8 @@ export default React.createClass({
     this.props.readFromAPI(this.props.origin + '/workouts', (workouts) => {
       let totalCals = 0;
       workouts.forEach(workout => {
-        totalCals += workout.exercise.cals_per_hour / 60 * workout.duration;
+        totalCals += parseInt(workout.exercise.cals_per_hour / 60 * workout.duration);
+        this.props.burnedCals(parseInt(workout.exercise.cals_per_hour / 60 * workout.duration));
       });
       this.setState({bCals: totalCals});
       //this.props.burnedCals(totalCals);
@@ -45,9 +46,9 @@ export default React.createClass({
       this.setState({workouts: workouts});
       this.setState({exercises: []})
       let totalBCals = this.state.bCals;
-      totalBCals += (workout.exercise.cals_per_hour / 60) * workout.duration;
+      totalBCals += parseInt(workout.exercise.cals_per_hour / 60 * workout.duration);
       this.setState({bCals: totalBCals});
-      this.props.burnedCals(workout.exercise.cals_per_hour / 60 * workout.duration);
+      this.props.burnedCals(parseInt(workout.exercise.cals_per_hour / 60 * workout.duration));
 
     }.bind(this));
   },
@@ -68,7 +69,7 @@ export default React.createClass({
       }
     });
     let parsedData = JSON.parse(data);
-    this.props.eatenCals(parsedData.workout.bCals);
+    //this.props.eatenCals(parsedData.workout.bCals);
   },
   render() {
     return <div>
