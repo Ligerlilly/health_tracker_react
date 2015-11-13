@@ -1,6 +1,7 @@
 import React from 'react';
 import FoodList from './FoodList';
 import MealList from './MealList';
+import BarChart from '../chart/BarChart';
 
 export default React.createClass({
   getInitialState() {
@@ -23,7 +24,7 @@ export default React.createClass({
       });
       this.setState({tCals: totalCals});
       this.setState({meals: meals});
-      this.props.eatenCals(totalCals);
+      //this.props.eatenCals(totalCals);
     }.bind(this));
   },
   onKeyUp(e) {
@@ -45,7 +46,7 @@ export default React.createClass({
       let totalCals = this.state.tCals;
       totalCals += meal.food.calories;
       this.setState({tCals: totalCals});
-      this.props.eatenCals(totalCals);
+      this.props.eatenCals(meal.food.calories);
     }.bind(this));
   },
   deleteMeal(data, id) {
@@ -62,9 +63,10 @@ export default React.createClass({
   },
   render() {
     return (
-      <div>
+      <div className='foodBox'>
         <h2>Foods</h2>
         <h3>Calories eaten today: {this.state.tCals}</h3>
+        <BarChart cals={this.props.calsArray} color={'cornflowerblue'}/>
         <input type='text' placeholder='Search for a food:' className='form-control' onKeyUp={this.onKeyUp} ref='foodSearch' id='foodSearch'/>
         <FoodList data={this.state.foods} writeToAPI={this.props.writeToAPI} origin={this.props.origin} input={this.refs.foodSearch} createMeal={this.createMeal} />
         <MealList data={this.state.meals} deleteMeal={this.deleteMeal} />

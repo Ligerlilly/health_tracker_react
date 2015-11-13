@@ -10,7 +10,7 @@ foods = [
   ["chicken", 275],
   ["soda", 140],
   ["almonds", 105],
-  ["tea", 0],
+  ["tea", 5],
   ["potato chips", 200],
   ["rice", 175]
 ]

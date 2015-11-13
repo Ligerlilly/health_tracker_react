@@ -1,6 +1,7 @@
 import React from 'react';
 import ExerciseList from './ExerciseList';
 import WorkoutList from './WorkoutList';
+import BarChart from '../chart/BarChart';
 
 export default React.createClass({
   getInitialState() {
@@ -22,7 +23,7 @@ export default React.createClass({
         totalCals += workout.exercise.cals_per_hour / 60 * workout.duration;
       });
       this.setState({bCals: totalCals});
-      this.props.burnedCals(totalCals);
+      //this.props.burnedCals(totalCals);
       this.setState({workouts: workouts});
     }.bind(this));
   },
@@ -46,7 +47,7 @@ export default React.createClass({
       let totalBCals = this.state.bCals;
       totalBCals += (workout.exercise.cals_per_hour / 60) * workout.duration;
       this.setState({bCals: totalBCals});
-      this.props.burnedCals(totalBCals);
+      this.props.burnedCals(workout.exercise.cals_per_hour / 60 * workout.duration);
 
     }.bind(this));
   },
@@ -73,6 +74,7 @@ export default React.createClass({
     return <div>
       <h2>Exercises</h2>
       <h3>Calories burned today: {this.state.bCals}</h3>
+      <BarChart cals={this.props.exercises} color={'green'} className='inline'/>
       <input type='text' placeholder='Search for an exercise:' className='form-control' onKeyUp={this.onKeyUp} ref='exerciseSearch' id='exerciseSearch'/>
       <ExerciseList data={this.state.exercises} writeToAPI={this.props.writeToAPI} origin={this.props.origin} input={this.refs.exerciseSearch} createWorkout={this.createWorkout} />
       <WorkoutList data={this.state.workouts} deleteWorkout={this.deleteWorkout} />

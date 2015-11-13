@@ -6,20 +6,15 @@ import ExerciseBox from './exercise/ExerciseBox';
 import Reqwest from 'reqwest';
 
 
-import Chart from './Chart';
-
-var sampleData = [
-  {id: '5fbmzmtc', x: 7, y: 41, z: 6},
-  {id: 's4f8phwm', x: 11, y: 45, z: 9},
-];
 export default React.createClass({
   getDefaultProps() {
     return { origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''};
   },
   getInitialState() {
     return {
-      data: sampleData,
-      domain: {x: [0, 30], y: [0, 100]}
+      exercises: [],
+      calsArray: [],
+      totalCals: 0
     }
   },
   readFromAPI(url, successFunction) {
@@ -49,8 +44,19 @@ export default React.createClass({
       }
     });
   },
+  eatenCals(cals) {
+    // let tCals = this.state.totalCals;
+    // tCals = tCals + cals;
+    // this.setState({totalCals: tCals});
+    this.setState({calsArray: this.state.calsArray.concat([cals])});
+  },
+  burnedCals(cals) {
+    // let tCals = this.state.totalCals;
+    // tCals = tCals -cals;
+    this.setState({exercises: this.state.exercises.concat([cals])});
+  },
   render() {
-    var childrenWithProps = React.cloneElement(this.props.children, {readFromAPI: this.readFromAPI, origin: this.props.origin, writeToAPI: this.writeToAPI})
+    var childrenWithProps = React.cloneElement(this.props.children, { exercises: this.state.exercises, calsArray: this.state.calsArray, eatenCals: this.eatenCals, burnedCals: this.burnedCals, readFromAPI: this.readFromAPI, origin: this.props.origin, writeToAPI: this.writeToAPI})
     return <div>
       <Navbar inverse>
         <NavBrand><Link to='/'>Health Tracker React</Link></NavBrand>
@@ -60,7 +66,8 @@ export default React.createClass({
         </Nav>
       </Navbar>
       <div className='container'>
-        <Chart data={this.state.data} domain={this.state.domain} />
+
+        <h1 className='text-center'>Total daily calories {this.state.totalCals}</h1>
         {childrenWithProps}
       </div>
     </div>;
