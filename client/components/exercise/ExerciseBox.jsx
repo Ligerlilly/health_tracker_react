@@ -21,7 +21,7 @@ export default React.createClass({
       let totalCals = 0;
       workouts.forEach(workout => {
         totalCals += parseInt(workout.exercise.cals_per_hour / 60 * workout.duration);
-        this.props.burnedCals(parseInt(workout.exercise.cals_per_hour / 60 * workout.duration));
+        //this.props.burnedCals(parseInt(workout.exercise.cals_per_hour / 60 * workout.duration));
       });
       this.setState({bCals: totalCals});
       //this.props.burnedCals(totalCals);
@@ -67,6 +67,7 @@ export default React.createClass({
         this.setSate({workouts: []});
         this.setState({bCals: 0});
       }
+      this.props.deleteWorkouts(workouts);
     });
     let parsedData = JSON.parse(data);
     //this.props.eatenCals(parsedData.workout.bCals);

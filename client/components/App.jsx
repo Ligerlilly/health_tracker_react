@@ -55,8 +55,20 @@ export default React.createClass({
     // tCals = tCals -cals;
     this.setState({exercises: this.state.exercises.concat([cals])});
   },
+  deleteMeals(meals) {
+    this.setState({calsArray: []});
+    meals.forEach(meal => {
+      this.setState({calsArray: this.state.calsArray.concat([meal.food.calories])});
+    });
+  },
+  deleteWorkouts(workouts) {
+    this.setState({exercises: []});
+    workouts.forEach(workout => {
+      this.setState({exercises: this.state.exercises.concat([parseInt(workout.exercise.cals_per_hour / 60 * workout.duration)])})
+    });
+  },
   render() {
-    var childrenWithProps = React.cloneElement(this.props.children, { exercises: this.state.exercises, calsArray: this.state.calsArray, eatenCals: this.eatenCals, burnedCals: this.burnedCals, readFromAPI: this.readFromAPI, origin: this.props.origin, writeToAPI: this.writeToAPI})
+    var childrenWithProps = React.cloneElement(this.props.children, { deleteWorkouts: this.deleteWorkouts, deleteMeals: this.deleteMeals, exercises: this.state.exercises, calsArray: this.state.calsArray, eatenCals: this.eatenCals, burnedCals: this.burnedCals, readFromAPI: this.readFromAPI, origin: this.props.origin, writeToAPI: this.writeToAPI})
     return <div>
       <Navbar inverse>
         <NavBrand><Link to='/'>Health Tracker React</Link></NavBrand>
@@ -67,7 +79,7 @@ export default React.createClass({
       </Navbar>
       <div className='container'>
 
-        <h1 className='text-center'>Total daily calories {this.state.totalCals}</h1>
+        
         {childrenWithProps}
       </div>
     </div>;

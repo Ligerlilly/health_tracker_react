@@ -21,7 +21,7 @@ export default React.createClass({
       let totalCals = 0;
       meals.forEach(meal => {
         totalCals += meal.food.calories;
-        this.props.eatenCals(meal.food.calories);
+        //this.props.eatenCals(meal.food.calories);
       });
       this.setState({tCals: totalCals});
       this.setState({meals: meals});
@@ -58,8 +58,10 @@ export default React.createClass({
       });
       this.setState({tCals: totalCals});
       this.setState({meals: meals});
+      this.props.deleteMeals(meals);
     });
     let parsedData = JSON.parse(data);
+
     //this.props.burnedCals(parsedData.meal.calories);
   },
   render() {
