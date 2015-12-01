@@ -4,7 +4,10 @@
   "description": "health tracker app with react frontend",
   "main": "client/main.jsx",
   "scripts": {
-    "devserve": "webpack-dev-server  --hot --inline -d --config webpack.dev.config.js --content-base public/ --progress --colors"
+    "devserve": "webpack-dev-server  --hot --inline -d --config webpack.dev.config.js --content-base public/ --progress --colors",
+    "probuild": "webpack -p --config webpack.pro.config.js --profile --progress --colors",
+    "postinstall": "npm run probuild && npm run rejoice",
+    "rejoice": "echo yay!"
   },
   "author": "",
   "license": "ISC",

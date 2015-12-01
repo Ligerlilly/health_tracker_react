@@ -7,6 +7,10 @@ gem 'rails-api'
 gem 'puma'
 gem 'pg'
 
+group :production do
+  gem 'rails_12factor'
+end
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'launchy'
